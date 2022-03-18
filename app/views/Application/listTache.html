@@ -5,13 +5,14 @@
 
 #{if taches}
 <ul>
-    *{ A COMPLETER }*
-	<li id="*{ A COMPLETER }*">
-	    <input type="checkbox">
-	    <span class="title">*{ A COMPLETER }*</span>
-	    <a href="#" class="edit"><img src="@{'/public/images/edit.png'}" alt="modifier la tache" width="10" height="10"></a>
-	    <a href="#" class="del"><img src="@{'/public/images/delete.png'}" alt="supprimer la tache" width="10" height="10"></a>
+    #{list items:taches, as:'tache'}
+	<li id="${tache.id}">
+	    <input id="${tache.id}" type="checkbox" #{if tache.done} checked #{/if} >
+	    <span class="title">${tache.title}</span>
+	    <a id="${tache.id}" href="#" class="edit"><img src="@{'/public/images/edit.png'}" alt="modifier la tache" width="10" height="10"></a>
+	    <a id="${tache.id}" href="#" class="del"><img src="@{'/public/images/delete.png'}" alt="supprimer la tache" width="10" height="10"></a>
 	</li>
+    #{/list}
 </ul>
 #{/if}
 #{else}
@@ -55,14 +56,14 @@
         // Affiche une popup de confirmation de suppression
         var confirmSuppr = confirm('Supprimer la tâche ?');
         // Si click sur ok, requête ajax vers serveur pour supprimer la tâche
+        
         if(confirmSuppr) {
-            // A COMPLETER
-            // ...
             $.ajax({
-                url: '',
-                type: '',
-                data: {},
+                url: '@{Application.supprimerTache()}',
+                type: 'DELETE',
+                data: {id: $(this).attr('id')},
                 success: function(result) {
+                    console.log(result);
                     $('#' + result.id).remove();
                 }
             });
@@ -79,12 +80,10 @@
         var newTitle = prompt('Tâche : ', $(this).prev().text());
         // Si click sur ok, requête ajax vers serveur pour modifier la tâche
         if(newTitle) {
-        	// A COMPLETER
-        	// ...
             $.ajax({
-                url: '',
-                type: '',
-                data: {},
+                url: '@{Application.editTache()}',
+                type: 'PUT',
+                data: {id: $(this).attr('id'), title: newTitle},
                 success: function(result) {
                     $('#' + result.id + ' span').text(result.title);
                 }
