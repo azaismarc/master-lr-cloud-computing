@@ -5,7 +5,7 @@ import play.test.Fixtures;
 
 
 @OnApplicationStart
-public class Bootstrap extends Job {
+public class Bootstrap extends Job<Tache> {
 
     public void doJob() {
         // Load default data if the database is empty
