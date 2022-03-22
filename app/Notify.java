@@ -46,8 +46,7 @@ public class Notify extends Job<Rappel> {
                             response.append(responseLine.trim());
                         }
                         System.out.println(response.toString());
-                        rappel.isDone();
-                        rappel.save();
+                        rappel.delete();
                 }
             }
         }
