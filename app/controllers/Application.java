@@ -1,10 +1,6 @@
 package controllers;
 
 import java.util.List;
-
-import javax.persistence.EntityManager;
-
-import play.db.jpa.JPA;
 import play.mvc.Controller;
 
 import models.Tache;
@@ -24,30 +20,30 @@ public class Application extends Controller {
 
     // Ajoute une nouvelle tâche en base de données et affiche le template views/ajouterTache.html
     public static void ajouterTache(String title) {
-        EntityManager em = JPA.em();
         Tache tache = new Tache(title);
-        em.persist(tache);
+        tache.save();
         render();
     }
 
     // Change le statut d'une tâche en base de données
     public static void validerTache(Long id) {
         Tache tache = Tache.findById(id);
-        tache.done = !tache.done;
+        tache.changeStatut();
         tache.save();
     }
 
     // Supprime une tâche en base de données
     public static void supprimerTache(Long id) {
-        JPA.em().remove(Tache.findById(id));
-        renderJSON("{\"id\": " + id +"}");
+        Tache tache = Tache.findById(id);
+        tache.delete();
+        renderJSON(tache);
     }
 
     // Modifie une tâche en base de données
     public static void editTache(Long id, String title) {
         Tache tache = Tache.findById(id);
-        tache.title = title;
+        tache.setTitle(title);
         tache.save();
-        renderJSON("{\"id\": " + id +", \"title\": " + title +"}");
+        renderJSON(tache);
     }
 }
