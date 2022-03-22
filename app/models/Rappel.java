@@ -21,6 +21,7 @@ public class Rappel extends Model {
     }
 
     public boolean doNotify() {
+        System.out.println(LocalDateTime.now());
         return this.date.isBefore(LocalDateTime.now());
     }
 
