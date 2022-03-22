@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set title:'Ajouter un rappel' /}
+
+<h1>Ajouter un nouveau rappel</h1>
+
+<form method="POST">
+    <div>
+        <label for="date">Date & Heure:</label>
+        <input type="datetime-local" id="date" name="date" required/>
+    </div>
+    <button>Ajouter</button>
+</form>

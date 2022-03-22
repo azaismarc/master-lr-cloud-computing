@@ -1,8 +1,9 @@
 package controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import play.mvc.Controller;
-
+import models.Rappel;
 import models.Tache;
 
 public class Application extends Controller {
@@ -45,5 +46,16 @@ public class Application extends Controller {
         tache.setTitle(title);
         tache.save();
         renderJSON(tache);
+    }
+
+    public static void ajouterRappelForm(Long id) {
+        render();
+    }
+
+    public static void ajouterRappel(Long id, LocalDateTime date) {
+        Tache tache = Tache.findById(id);
+        Rappel rappel = new Rappel(date, tache);
+        rappel.save();
+        render();
     }
 }

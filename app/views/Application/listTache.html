@@ -11,6 +11,7 @@
 	    <span class="title">${tache.title}</span>
 	    <a id="${tache.id}" href="#" class="edit"><img src="@{'/public/images/edit.png'}" alt="modifier la tache" width="10" height="10"></a>
 	    <a id="${tache.id}" href="#" class="del"><img src="@{'/public/images/delete.png'}" alt="supprimer la tache" width="10" height="10"></a>
+        <a href="@{Application.ajouterRappelForm(tache.id)}">Rappel</a>
 	</li>
     #{/list}
 </ul>

@@ -10,6 +10,8 @@ POST    /taches/ajouter                         Application.ajouterTache
 POST    /taches/valider                         Application.validerTache
 DELETE  /taches/supprimer                       Application.supprimerTache
 PUT     /taches/modification                    Application.editTache
+GET     /taches/{id}/rappel/ajouter             Application.ajouterRappelForm
+POST    /taches/{id}/rappel/ajouter             Application.ajouterRappel
 
 # API
 POST    /api/tache                              ServiceWeb.ajouterTache
