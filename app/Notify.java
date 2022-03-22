@@ -23,7 +23,7 @@ public class Notify extends Job<Rappel> {
 
     public void doJob() throws IOException {
         List<Rappel> rappels = Rappel.findAll();
-
+        System.out.println("Run notify ! " + Rappel.count());
         for(Rappel rappel : rappels) {
             if (rappel.doNotify()) {
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();

@@ -3,6 +3,7 @@ package models;
 import play.db.jpa.Model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -21,8 +22,7 @@ public class Rappel extends Model {
     }
 
     public boolean doNotify() {
-        System.out.println(LocalDateTime.now());
-        return this.date.isBefore(LocalDateTime.now());
+        return this.date.isBefore(LocalDateTime.now(ZoneId.of("Europe/Paris")));
     }
 
     public String message() {
