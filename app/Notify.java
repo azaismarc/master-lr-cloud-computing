@@ -22,11 +22,9 @@ public class Notify extends Job<Rappel> {
     }
 
     public void doJob() throws IOException {
-        System.out.println("Run");
         List<Rappel> rappels = Rappel.findAll();
 
         for(Rappel rappel : rappels) {
-            System.out.println(rappel.doNotify());
             if (rappel.doNotify()) {
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
                 con.setRequestMethod("POST");
